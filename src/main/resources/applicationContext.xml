@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Внедрение строк из properties файла -->
+    <context:property-placeholder location="classpath:myApp.properties"/>
+
+    <bean id="myPet"
+          class="com.example.practicespring.Cat">
+    </bean>
+
+    <!-- Внедрение зависимости с помощью конструктора -->
+
+    <!--    <bean id="myPerson"-->
+    <!--          class="com.example.practicespring.Person">-->
+    <!--        <constructor-arg ref="myPet">-->
+    <!--        </constructor-arg>-->
+    <!--    </bean>-->
+
+    <!-- Внедрение зависимости с помощью setter хардкод вариант-->
+
+<!--    <bean id="myPerson"-->
+<!--          class="com.example.practicespring.Person">-->
+<!--        <property name="pet" ref="myPet"/>-->
+<!--        &lt;!&ndash; Внедрение строк и других зависимостей &ndash;&gt;-->
+<!--        <property name="lastName" value="Treg"/>-->
+<!--        <property name="name" value="Fedor"/>-->
+<!--        <property name="age" value="19"/>-->
+<!--    </bean>-->
+
+    <bean id="myPerson"
+          class="com.example.practicespring.Person">
+        <property name="pet" ref="myPet"/>
+        <!-- Внедрение строк и других зависимостей -->
+        <property name="lastName" value="${person.surname}"/>
+        <property name="name" value="${person.name}"/>
+        <property name="age" value="${person.age}"/>
+    </bean>
+
+</beans>
